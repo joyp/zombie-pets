@@ -1,10 +1,10 @@
 doctype html
-html(ng-app='mean-template', lang='en')
+html(ng-app='zombie-pets', lang='en')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title MEAN Template
+    title Zombie Pets
     link(href='/vendor/bootstrap/dist/css/bootstrap.css', rel='stylesheet')
     link(href='/vendor/fontawesome/css/font-awesome.css', rel='stylesheet')
     link(href='/index.css', rel='stylesheet')
@@ -13,9 +13,58 @@ html(ng-app='mean-template', lang='en')
       .row
         .col-xs-12
           h1 {{title}}
-          h2
-            span Web Development for &nbsp;
-            em: u {{occupation}}
+
+      .row
+        .col-xs-3
+          h3 Create Weapon
+          button.btn.btn-success(ng-click='toggleWeapon()') Toggle Form
+          form(role-'form', novalidate, ng-hide='hideWeapon', name='weaponForm')
+            .form-group
+              label(for='name') Name
+              input.form-control#name(ng-minlength='3', ng-maxlength='10', required, ng-model='weapon.name', type='text', name='name', autofocus)
+            .form-group
+              label(for='photo') Photo
+              input.form-control#photo(ng-pattern='/^http:///', required, ng-model='weapon.photo', type='text', name='photo')
+            .form-group
+              label(for='damage') Damage
+              input.form-control#damage(required, ng-model='weapon.damage', type='number', name='damage')
+            button.btn.btn-primary(ng-click='addWeapon()', type='submit', ng-show='weaponForm.$valid') Add Weapon
+        .col-xs-3
+          h3 Create Pet
+          button.btn.btn-success(ng-click='togglePet()') Toggle Form
+          form(role-'form', novalidate, ng-hide='hidePet', name='petForm')
+            .form-group
+              label(for='name') Name
+              input.form-control#petName(required, ng-model='pet.name', type='text', name='name')
+            .form-group
+              label(for='photo') Photo
+              input.form-control#petPhoto(ng-pattern='/^http/', required, ng-model='pet.photo', type='text', name='photo')
+            .form-group
+              label Health
+              input.form-control(type='number', readonly, ng-model='pet.health')
+            .form-group
+              label(for='weapon') Choose Weapon
+              select(name='weapon', ng-model='pet.weapon')
+                option(ng-repeat='w in weapons', value='{{$index}}') {{w.name}}
+            button.btn.btn-primary(ng-click='addPet()', type='submit', ng-show='petForm.$valid') Create Pet
+         .col-xs-6
+      .row
+        .col-xs-12
+          .weapon(ng-repeat='w in weapons', style='background-image:url("{{w.photo}}");')
+            .name Name: {{w.name}}
+            .damage Damage: {{w.damage}}
+      .row
+        .col-xs-12
+          .pet(ng-repeat='p in pets', style='background-image:url("{{p.photo}}");')
+            .name Name: {{p.name}}
+            .health Health: {{p.health}}
+            .weapon(style='background-image:url("{{p.weapon.photo}}");')
+      .row
+        .col-xs-12
+          pre {{weapon | json}}
+          pre {{weapons | json}}
+          pre {{pet | json}}
+          pre {{pets | json}}
 
     script(src='/vendor/angular/angular.js')
     script(src='/vendor/jquery/dist/jquery.js')

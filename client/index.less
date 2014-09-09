@@ -1,4 +1,56 @@
 body{
-  background-color: #ffdc00;
+  background-color: #c2ad99;
 }
 
+input.ng-invalid{
+  background-color: #ff704d;
+}
+
+.weapon{
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid;
+  height: 300px;
+  width: 300px;
+  border-radius: 10px;
+
+  .name{
+    font-size: 2em;
+    font-weight: bold;
+    color: #800000;
+  }
+
+  .damage{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #800000;
+  }
+}
+
+.pet{
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid;
+  height: 300px;
+  border-radius: 10px;
+
+  .name{
+    font-size: 2em;
+    font-weight: bold;
+    color: #800000;
+  }
+
+  .health{
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+}
+
+.pet > .weapon{
+    background-repeat: no-repeat;
+    background-image: cover;
+    height: 100px;
+    border-radius: 10px;
+}
